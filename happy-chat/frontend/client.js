@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const back = document.getElementById('back');
     const chatbox = document.querySelector('.chatbox');
     const chat_input = document.getElementById('message');
-    const sendbtn = document.getElementById('send');
+    const chatForm = document.getElementById('chat-form');
     const ws = new WebSocket('ws://' + window.location.hostname + ':' + window.location.port + '/happy-chat/api');
     let roomName = ""
 
@@ -38,7 +38,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }));
         console.log(message);
     }
-    sendbtn.addEventListener('click', sendMessage);
+    chatForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        sendMessage();
+    });
 
     function loadChatRoom(roomName) {
         // Hide chat list and show chat content
